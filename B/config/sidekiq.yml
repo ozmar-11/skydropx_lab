@@ -1,0 +1,9 @@
+---
+:queues:
+  - producer
+  - default
+
+:schedule:
+  fedex_consumer:
+    every: 10m
+    class: FedexProducerJob
