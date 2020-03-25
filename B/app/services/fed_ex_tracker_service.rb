@@ -9,10 +9,6 @@ class FedExTrackerService
   }
 
   class << self
-    def shipment(tracking_number)
-      fedex.track(tracking_number: tracking_number)
-    end
-
     def shipment_status(tracking_number)
       begin
         FEDEX_TO_B_STATUS_EQUIBALENCES.fetch(shipment(tracking_number).first.status, ON_TRANSIT_STATUS)
@@ -33,6 +29,10 @@ class FedExTrackerService
     end
 
     private
+
+    def shipment(tracking_number)
+      fedex.track(tracking_number: tracking_number)
+    end
 
     def fedex
       @@fedex ||= Fedex::Shipment.new(fedex_credentials)
